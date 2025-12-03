@@ -1,0 +1,53 @@
+<div class="container py-4">
+
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+          <h3 class="mb-4 fw-bold text-center">Create New Quiz</h3>
+
+          <!-- Display Errors If Any -->
+          <% if @quiz.errors.any? %>
+            <div class="alert alert-danger">
+              <h6 class="fw-bold">Please fix the following:</h6>
+              <ul class="mb-0">
+                <% @quiz.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <!-- Quiz Form -->
+          <%= form_with model: @quiz, url: quizes_path, local: true, class: "needs-validation" do |f| %>
+
+            <!-- Title -->
+            <div class="mb-3">
+              <%= f.label :title, "Quiz Title", class: "form-label fw-semibold" %>
+              <%= f.text_field :title, class: "form-control", placeholder: "Enter quiz title", required: true %>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+              <%= f.label :description, "Quiz Description", class: "form-label fw-semibold" %>
+              <%= f.text_area :description, rows: 4, class: "form-control", placeholder: "Write a short description...", required: true %>
+            </div>
+
+            <%= f.hidden_field :user_id, value: current_user.id %>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+              <%= f.submit "Create Quiz", class: "btn btn-primary px-4 py-2" %>
+            </div>
+
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

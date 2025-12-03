@@ -1,0 +1,342 @@
+<style>
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+
+  .quiz-container {
+    padding: 2rem 0;
+  }
+
+  .quiz-header {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+
+  .quiz-header h1 {
+    color: #667eea;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .welcome-text {
+    color: #6c757d;
+    font-size: 1.1rem;
+  }
+
+  .btn-create {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-create:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    color: white;
+  }
+
+  .quiz-card {
+    background: white;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    border: none;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .quiz-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
+
+  .quiz-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    z-index: 1;
+  }
+
+  .quiz-card-body {
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quiz-title {
+    color: #2d3748;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .quiz-description {
+    color: #718096;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .quiz-creator {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 2px solid #f7fafc;
+    margin-top: auto;
+  }
+
+  .creator-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    margin-right: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .creator-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .creator-label {
+    font-size: 0.7rem;
+    color: #a0aec0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+
+  .creator-email {
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 0.85rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .empty-state h3 {
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+  }
+
+  .empty-state p {
+    color: #a0aec0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .quiz-header h1 {
+      font-size: 2rem;
+    }
+    
+    .quiz-container {
+      padding: 1rem 0;
+    }
+
+    .quiz-card-body {
+      padding: 1.5rem;
+    }
+
+    .quiz-title {
+      font-size: 1.25rem;
+    }
+
+    .quiz-description {
+      font-size: 0.9rem;
+    }
+
+    .quiz-header {
+      padding: 1.5rem;
+      border-radius: 15px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .quiz-header h1 {
+      font-size: 1.75rem;
+    }
+
+    .welcome-text {
+      font-size: 1rem;
+    }
+
+    .quiz-card-body {
+      padding: 1.25rem;
+    }
+
+    .quiz-title {
+      font-size: 1.15rem;
+    }
+
+    .quiz-description {
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .creator-avatar {
+      width: 35px;
+      height: 35px;
+      min-width: 35px;
+      font-size: 0.85rem;
+    }
+
+    .creator-email {
+      font-size: 0.8rem;
+    }
+
+    .creator-label {
+      font-size: 0.65rem;
+    }
+
+    .btn-create {
+      width: 100%;
+      padding: 0.65rem 1.5rem;
+      text-align: center;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .quiz-card-body {
+      padding: 1.75rem;
+    }
+
+    .quiz-title {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .quiz-title {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Equal height cards */
+  .row-equal {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .card-col {
+    display: flex;
+    margin-bottom: 1.5rem;
+  }
+</style>
+
+<div class="quiz-container">
+  <div class="container col-4">
+    <% current_user = User.find(1) %>
+    
+    <!-- Header -->
+    <div class="quiz-header">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+        <div>
+          <h1 class="mb-1">Quizzes</h1>
+          <p class="welcome-text mb-0">Welcome, <%= current_user.email %> 👋</p>
+        </div>
+
+        <% if current_user&.admin? %>
+          <%= link_to "Create New Quiz", new_quize_path, class: "btn btn-create mt-3 mt-md-0" %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Quiz Cards -->
+    <% if @quizes.any? %>
+      <div class="row g-4">
+        <% @quizes.each do |quiz| %>
+          <div class="col-12 col-sm-6 col-lg-4 card-col">
+            <div class="card quiz-card w-100">
+              <div class="card-body quiz-card-body">
+                <!-- Title -->
+                <h5 class="quiz-title"><%= quiz.title %></h5>
+
+                <!-- Description -->
+                <p class="quiz-description">
+                  <%= truncate(quiz.description, length: 120) %>
+                </p>
+
+                <!-- Creator info -->
+                <div class="quiz-creator">
+                  <div class="creator-avatar">
+                    <%= quiz.user.email.first.upcase %>
+                  </div>
+                  <div class="creator-info">
+                    <div class="creator-label">Created by</div>
+                    <div class="creator-email" title="<%= quiz.user.email %>">
+                      <%= quiz.user.email %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <div class="empty-state-icon">📝</div>
+        <h3>No quizzes yet</h3>
+        <p>Create your first quiz to get started!</p>
+      </div>
+    <% end %>
+
+  </div>
+</div>
