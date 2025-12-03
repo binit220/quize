@@ -9,7 +9,6 @@ class QuizesController < ApplicationController
   end
 
   def create
-    byebug
     @quiz = Quiz.new(quiz_params)
     @quiz.user = current_user
 
