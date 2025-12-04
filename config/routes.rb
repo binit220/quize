@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
-  root "quizes#index"
+  root "quizzes#index"
 
-  resources :quizes
+  resources :quizzes do
+    resources :questions do
+      resources :options
+    end
+  end
 end

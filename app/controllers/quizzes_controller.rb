@@ -1,4 +1,4 @@
-class QuizesController < ApplicationController
+class  QuizzesController < ApplicationController
   before_action :only_admin, only: [:new, :create]
   def index
     @quizes = Quiz.all.order(created_at: :desc)
@@ -11,13 +11,10 @@ class QuizesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params)
     @quiz.user = current_user
-
-    respond_to do |format|
-      if @quiz.save
-        format.html { redirect_to new_quiz_question_path(@quiz), notice: "Quiz was created successfully."}
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @quiz.save
+      redirect_to new_quiz_question_path(@quiz), notice: "Quiz was created successfully."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
